@@ -1,0 +1,165 @@
+Archive Project report for Lab7-1
+Fri Oct 29 10:46:18 2021
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Archive Project Summary
+  3. Archive Project Messages
+  4. Files Archived
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------+
+; Archive Project Summary                                        ;
++------------------------+---------------------------------------+
+; Archive Project Status ; Successful - Fri Oct 29 10:46:18 2021 ;
+; Revision Name          ; Lab7-1                                ;
+; Top-level Entity Name  ; lab7                                  ;
+; Family                 ; MAX 10                                ;
++------------------------+---------------------------------------+
+
+
++--------------------------+
+; Archive Project Messages ;
++--------------------------+
+Info: File Set 'Source control' contains:
+    Info: Project source and settings files
+    Info: Automatically detected source files
+Warning: Hierarchical Platform Designer systems and custom IP components(_hw.tcl and associated files) are not archived by the Quartus Archiver
+Info: Archive will store files relative to the closest common parent directory
+Info (13213): Using common directory C:/intelFPGA_lite/18.1/Lab7-1/
+Info: ----------------------------------------------------------
+Info: ----------------------------------------------------------
+Info: Generated archive 'C:/intelFPGA_lite/18.1/Lab7-1/Lab7-1 ericrc3 waltert3.qar'
+Info: ----------------------------------------------------------
+Info: ----------------------------------------------------------
+Info: Generated report 'Lab7-1.archive.rpt'
+Info (23030): Evaluation of Tcl script c:/intelfpga_lite/18.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4844 megabytes
+    Info: Processing ended: Fri Oct 29 10:46:18 2021
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+
++---------------------------------------------------------------------------------------------------+
+; Files Archived                                                                                    ;
++---------------------------------------------------------------------------------------------------+
+; File Name                                                                                         ;
++---------------------------------------------------------------------------------------------------+
+; c:/intelfpga_lite/18.1/quartus/bin64/assignment_defaults.qdf                                      ;
+; font_rom.sv                                                                                       ;
+; HexDriver.sv                                                                                      ;
+; Lab7-1.qpf                                                                                        ;
+; Lab7-1.qsf                                                                                        ;
+; lab7.sdc                                                                                          ;
+; lab7.sv                                                                                           ;
+; lab7_soc/synthesis/../../lab7_soc.qsys                                                            ;
+; lab7_soc/synthesis/../../lab7_soc.sopcinfo                                                        ;
+; lab7_soc/synthesis/../lab7_soc.cmp                                                                ;
+; lab7_soc/synthesis/lab7_soc.debuginfo                                                             ;
+; lab7_soc/synthesis/lab7_soc.qip                                                                   ;
+; lab7_soc/synthesis/lab7_soc.regmap                                                                ;
+; lab7_soc/synthesis/lab7_soc.v                                                                     ;
+; lab7_soc/synthesis/submodules/altera_avalon_sc_fifo.v                                             ;
+; lab7_soc/synthesis/submodules/altera_avalon_st_clock_crosser.v                                    ;
+; lab7_soc/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.sdc                        ;
+; lab7_soc/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.v                          ;
+; lab7_soc/synthesis/submodules/altera_avalon_st_pipeline_base.v                                    ;
+; lab7_soc/synthesis/submodules/altera_avalon_st_pipeline_stage.sv                                  ;
+; lab7_soc/synthesis/submodules/altera_default_burst_converter.sv                                   ;
+; lab7_soc/synthesis/submodules/altera_incr_burst_converter.sv                                      ;
+; lab7_soc/synthesis/submodules/altera_merlin_address_alignment.sv                                  ;
+; lab7_soc/synthesis/submodules/altera_merlin_arbitrator.sv                                         ;
+; lab7_soc/synthesis/submodules/altera_merlin_burst_adapter.sv                                      ;
+; lab7_soc/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv                                 ;
+; lab7_soc/synthesis/submodules/altera_merlin_burst_adapter_new.sv                                  ;
+; lab7_soc/synthesis/submodules/altera_merlin_burst_adapter_uncmpr.sv                               ;
+; lab7_soc/synthesis/submodules/altera_merlin_burst_uncompressor.sv                                 ;
+; lab7_soc/synthesis/submodules/altera_merlin_master_agent.sv                                       ;
+; lab7_soc/synthesis/submodules/altera_merlin_master_translator.sv                                  ;
+; lab7_soc/synthesis/submodules/altera_merlin_slave_agent.sv                                        ;
+; lab7_soc/synthesis/submodules/altera_merlin_slave_translator.sv                                   ;
+; lab7_soc/synthesis/submodules/altera_merlin_width_adapter.sv                                      ;
+; lab7_soc/synthesis/submodules/altera_reset_controller.sdc                                         ;
+; lab7_soc/synthesis/submodules/altera_reset_controller.v                                           ;
+; lab7_soc/synthesis/submodules/altera_reset_synchronizer.v                                         ;
+; lab7_soc/synthesis/submodules/altera_std_synchronizer_nocut.v                                     ;
+; lab7_soc/synthesis/submodules/altera_wrap_burst_converter.sv                                      ;
+; lab7_soc/synthesis/submodules/lab7_soc_hex_digits_pio.v                                           ;
+; lab7_soc/synthesis/submodules/lab7_soc_irq_mapper.sv                                              ;
+; lab7_soc/synthesis/submodules/lab7_soc_jtag_uart.v                                                ;
+; lab7_soc/synthesis/submodules/lab7_soc_key.v                                                      ;
+; lab7_soc/synthesis/submodules/lab7_soc_keycode.v                                                  ;
+; lab7_soc/synthesis/submodules/lab7_soc_leds_pio.v                                                 ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0.v                                        ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_avalon_st_adapter.v                      ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_avalon_st_adapter_006.v                  ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_avalon_st_adapter_006_error_adapter_0.sv ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv     ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_cmd_demux.sv                             ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_cmd_demux_001.sv                         ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_cmd_mux.sv                               ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_cmd_mux_001.sv                           ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_router.sv                                ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_router_001.sv                            ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_router_002.sv                            ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_router_003.sv                            ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_router_008.sv                            ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_rsp_demux.sv                             ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_rsp_demux_001.sv                         ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_rsp_mux.sv                               ;
+; lab7_soc/synthesis/submodules/lab7_soc_mm_interconnect_0_rsp_mux_001.sv                           ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0.v                                             ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu.sdc                                       ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu.v                                         ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_debug_slave_sysclk.v                      ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_debug_slave_tck.v                         ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_debug_slave_wrapper.v                     ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_ociram_default_contents.mif               ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_rf_ram_a.mif                              ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_rf_ram_b.mif                              ;
+; lab7_soc/synthesis/submodules/lab7_soc_nios2_gen2_0_cpu_test_bench.v                              ;
+; lab7_soc/synthesis/submodules/lab7_soc_onchip_memory2_0.hex                                       ;
+; lab7_soc/synthesis/submodules/lab7_soc_onchip_memory2_0.v                                         ;
+; lab7_soc/synthesis/submodules/lab7_soc_sdram.v                                                    ;
+; lab7_soc/synthesis/submodules/lab7_soc_sdram_pll.v                                                ;
+; lab7_soc/synthesis/submodules/lab7_soc_spi.v                                                      ;
+; lab7_soc/synthesis/submodules/lab7_soc_sysid_qsys_0.v                                             ;
+; lab7_soc/synthesis/submodules/lab7_soc_timer.v                                                    ;
+; lab7_soc/synthesis/submodules/lab7_soc_usb_gpx.v                                                  ;
+; lab7_soc/synthesis/submodules/lab7_soc_usb_rst.v                                                  ;
+; lab7_soc/synthesis/submodules/vga_text_avl_interface.sv                                           ;
+; new_componentVG_hw.tcl                                                                            ;
+; output_files/stp1.stp                                                                             ;
+; output_files/stp2.stp                                                                             ;
+; output_files/stp3.stp                                                                             ;
+; output_files/stp4.stp                                                                             ;
+; VGA_controller.sv                                                                                 ;
+; vga_text_avl_interface.sv                                                                         ;
++---------------------------------------------------------------------------------------------------+
+
+
