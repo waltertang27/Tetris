@@ -20,7 +20,7 @@ module lab7 (
 
       ///////// LEDR /////////
       output   [ 9: 0]   LEDR,
-
+	 //sup
       ///////// HEX /////////
       output   [ 7: 0]   HEX0,
       output   [ 7: 0]   HEX1,
