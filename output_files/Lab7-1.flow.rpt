@@ -1,5 +1,5 @@
 Flow report for Lab7-1
-Sun Nov 14 17:06:12 2021
+Wed Nov 17 17:48:31 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,20 +40,20 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Nov 14 17:06:12 2021       ;
+; Flow Status                        ; Successful - Wed Nov 17 17:48:31 2021       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Lab7-1                                      ;
 ; Top-level Entity Name              ; lab7                                        ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 5,426 / 49,760 ( 11 % )                     ;
-;     Total combinational functions  ; 4,783 / 49,760 ( 10 % )                     ;
+; Total logic elements               ; 4,490 / 49,760 ( 9 % )                      ;
+;     Total combinational functions  ; 3,840 / 49,760 ( 8 % )                      ;
 ;     Dedicated logic registers      ; 2,755 / 49,760 ( 6 % )                      ;
 ; Total registers                    ; 2824                                        ;
 ; Total pins                         ; 141 / 360 ( 39 % )                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 49,792 / 1,677,312 ( 3 % )                  ;
+; Total memory bits                  ; 30,592 / 1,677,312 ( 2 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                             ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
 ; UFM blocks                         ; 0 / 1 ( 0 % )                               ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/14/2021 17:04:25 ;
+; Start date & time ; 11/17/2021 17:47:05 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Lab7-1              ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------+---------------+-------------------+----------------+
 ; Assignment Name                     ; Value                                                      ; Default Value ; Entity Name       ; Section Id     ;
 +-------------------------------------+------------------------------------------------------------+---------------+-------------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 49410874716731.163693106402252                             ; --            ; --                ; --             ;
+; COMPILER_SIGNATURE_ID               ; 49410874716731.163719282507568                             ; --            ; --                ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                                          ; --            ; --                ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (SystemVerilog)                            ; <None>        ; --                ; --             ;
 ; EDA_TIME_SCALE                      ; 1 ps                                                       ; --            ; --                ; eda_simulation ;
@@ -108,7 +108,7 @@ refer to the applicable agreement for further details.
 ; SLD_FILE                            ; lab7_soc/synthesis/lab7_soc.regmap                         ; --            ; --                ; --             ;
 ; SLD_FILE                            ; lab7_soc/synthesis/lab7_soc.debuginfo                      ; --            ; --                ; --             ;
 ; SLD_FILE                            ; db/stp2_auto_stripped.stp                                  ; --            ; --                ; --             ;
-; SLD_INFO                            ; QSYS_NAME lab7_soc HAS_SOPCINFO 1 GENERATION_ID 1636052695 ; --            ; lab7_soc          ; --             ;
+; SLD_INFO                            ; QSYS_NAME lab7_soc HAS_SOPCINFO 1 GENERATION_ID 1637192772 ; --            ; lab7_soc          ; --             ;
 ; SOPCINFO_FILE                       ; lab7_soc/synthesis/../../lab7_soc.sopcinfo                 ; --            ; --                ; --             ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                         ; --            ; --                ; --             ;
 ; TOP_LEVEL_ENTITY                    ; lab7                                                       ; Lab7-1        ; --                ; --             ;
@@ -121,13 +121,13 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:44     ; 1.0                     ; 5036 MB             ; 00:01:03                           ;
-; Fitter               ; 00:00:32     ; 1.7                     ; 6325 MB             ; 00:01:11                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 4705 MB             ; 00:00:03                           ;
-; Power Analyzer       ; 00:00:10     ; 1.8                     ; 5046 MB             ; 00:00:16                           ;
-; Timing Analyzer      ; 00:00:06     ; 2.8                     ; 5000 MB             ; 00:00:13                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4751 MB             ; 00:00:03                           ;
-; Total                ; 00:01:37     ; --                      ; --                  ; 00:02:49                           ;
+; Analysis & Synthesis ; 00:00:32     ; 1.0                     ; 5036 MB             ; 00:00:48                           ;
+; Fitter               ; 00:00:27     ; 1.6                     ; 6315 MB             ; 00:01:04                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4702 MB             ; 00:00:03                           ;
+; Power Analyzer       ; 00:00:06     ; 2.3                     ; 5024 MB             ; 00:00:11                           ;
+; Timing Analyzer      ; 00:00:05     ; 2.8                     ; 4983 MB             ; 00:00:12                           ;
+; EDA Netlist Writer   ; 00:00:03     ; 1.0                     ; 4732 MB             ; 00:00:03                           ;
+; Total                ; 00:01:16     ; --                      ; --                  ; 00:02:21                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

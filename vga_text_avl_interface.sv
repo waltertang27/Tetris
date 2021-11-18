@@ -119,7 +119,7 @@ logic invert;
 logic[3:0] current;
 logic[3:0] fgRed, fgGreen, fgBlue, bgRed, bgGreen, bgBlue;
 logic[10:0] font_addr;
-logic[7:0] font_data;
+logic[15:0] font_data;
 logic[31:0] ramOut;
 logic[3:0] fgIdx;
 logic[3:0] bgIdx;

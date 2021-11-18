@@ -18,18 +18,70 @@ void textVGAColorClr()
 {
 	for (int i = 0; i<(ROWS*COLUMNS) * 2; i++)
 	{
-		vga_ctrl->VRAM[i] = 0x00;
+		vga_ctrl->VRAM[i] = 0x0;
 	}
 }
 
 void textVGADrawColorText(char* str, int x, int y, alt_u8 background, alt_u8 foreground)
 {
+	alt_u8 st = 2;
 	int i = 0;
 	while (str[i]!=0)
 	{
 		vga_ctrl->VRAM[(y*COLUMNS + x + i) * 2] = foreground << 4 | background;
-		vga_ctrl->VRAM[(y*COLUMNS + x + i) * 2 + 1] = str[i];
+		vga_ctrl->VRAM[(y*COLUMNS + x + i) * 2 + 1] = st;
 		i++;
+	}
+}
+
+void Test(){
+	printf("test running");
+	textVGAColorClr();
+	for (int i = 0; i < 16; i++)
+	{
+		setColorPalette (i, colors[i].red, colors[i].green, colors[i].blue);
+
+	}
+	drawGrid(11, 0);
+	//draw a block of each type
+	vga_ctrl->VRAM[538 * 2] = 0xf4;
+	vga_ctrl->VRAM[538 * 2 + 1] = 0x01;
+	vga_ctrl->VRAM[541 * 2] = 0xf4;
+	vga_ctrl->VRAM[541 * 2 + 1] = 0x02;
+}
+
+void drawGrid(alt_u8 background, alt_u8 foreground){
+	//draw top left corner
+	vga_ctrl->VRAM[174 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[174 * 2 + 1] = 0x3;
+	//draw top wall
+	for(int i = 0; i < 10; i++){
+		vga_ctrl->VRAM[(175 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(175 + i) * 2 + 1] = 0x04;
+	}
+	//draw top right corner
+	vga_ctrl->VRAM[185 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[185 * 2 + 1] = 0x05;
+	//draw right wall
+	for(int i = 0; i < 20; i++){
+		vga_ctrl->VRAM[(225 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(225 + i * 40) * 2 + 1] = 0x06;
+	}
+	//draw bottom right corner
+	vga_ctrl->VRAM[1025 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[1025 * 2 + 1] = 0x07;
+	//draw bottom wall
+	for(int i = 0; i < 10; i++){
+		vga_ctrl->VRAM[(1015 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(1015 + i) * 2 + 1] = 0x08;
+	}
+	//draw bottom left corner
+	vga_ctrl->VRAM[1014 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[1014 * 2 + 1] = 0x09;
+	//draw left wall
+	for(int i = 0; i < 20; i++){
+		vga_ctrl->VRAM[(214 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(214 + i * 40) * 2 + 1] = 0x0a;
 	}
 }
 
@@ -70,8 +122,8 @@ void textVGAColorScreenSaver()
 			fg = rand() % 16;
 			bg = rand() % 16;
 		}
-		sprintf(color_string, "Drawing %s text with %s background", colors[fg].name, colors[bg].name);
-		x = rand() % (80-strlen(color_string));
+		sprintf(color_string, "abcdefghijklmnopqrstuvwxyz");
+		x = rand() % (40-strlen(color_string));
 		y = rand() % 30;
 		textVGADrawColorText (color_string, x, y, bg, fg);
 		usleep (100000);
