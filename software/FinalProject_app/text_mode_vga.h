@@ -46,18 +46,19 @@ static struct COLOR colors[]={
 	{"light gray",     0xa, 0xa, 0xa}, //7
     {"dark gray",      0x5, 0x5, 0x5}, //8
 	{"light blue",     0x5, 0x5, 0xf}, //9
-    {"light green",    0x5, 0xf, 0x5}, //a
-	{"light cyan",     0x5, 0xf, 0xf}, //b
-    {"light red",      0xf, 0x5, 0x5}, //c
-	{"light magenta",  0xf, 0x5, 0xf}, //d
-    {"yellow",         0xf, 0xf, 0x5}, //e
-	{"white",          0xf, 0xf, 0xf} //f
+    {"light green",    0x5, 0xf, 0x5}, //10
+	{"light cyan",     0x5, 0xf, 0xf}, //11
+    {"light red",      0xf, 0x5, 0x5}, //12
+	{"light magenta",  0xf, 0x5, 0xf}, //13
+    {"yellow",         0xf, 0xf, 0x5}, //14
+	{"white",          0xf, 0xf, 0xf} //15
 };
 
 
 void textVGAColorClr();
 void Test();
 void drawGrid(alt_u8 background, alt_u8 foreground);
+void drawGame(int gameboard[20][10], alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 bg2);
 void textVGADrawColorText(char* str, int x, int y, alt_u8 background, alt_u8 foreground);
 void setColorPalette (alt_u8 color, alt_u8 red, alt_u8 green, alt_u8 blue); //Fill in this code
 

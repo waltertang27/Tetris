@@ -67,7 +67,7 @@ assign AVL_ADDR_READ = AVL_ADDR[10:0];
 vga_controller vga (.*, .Clk(CLK), .Reset(RESET), .pixel_clk(VGA_Clk));
 font_rom rom (.addr(font_addr), .data(font_data));
 
-ram vram (.address_a(AVL_ADDR_READ), .byteena_a(AVL_BYTE_EN), .clock(CLK), .data_a(AVL_WRITEDATA), .rden_a(AVL_READ_SEL), .wren_a(AVL_WRITE_SEL), .q_a(VRAMreadData), 
+ram2 vram (.address_a(AVL_ADDR_READ), .byteena_a(AVL_BYTE_EN), .clock(CLK), .data_a(AVL_WRITEDATA), .rden_a(AVL_READ_SEL), .wren_a(AVL_WRITE_SEL), .q_a(VRAMreadData), 
 			 .address_b(regIndex), .data_b(32'b0), .rden_b(1'b1), .wren_b(1'b0), .q_b(ramOut));
 
 always_ff @(posedge CLK) begin
