@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484) Path("C:/intelFPGA_lite/18.1/Lab7-1/output_files/") File("Lab7-1.sof") MfrSpec(OpMask(1));
+		Device PartName(10M50DAF484) Path("C:/intelFPGA_lite/18.1/Lab7-1/385Final/output_files/") File("Lab7-1.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

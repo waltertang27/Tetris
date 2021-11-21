@@ -67,9 +67,8 @@ assign AVL_ADDR_READ = AVL_ADDR[10:0];
 vga_controller vga (.*, .Clk(CLK), .Reset(RESET), .pixel_clk(VGA_Clk));
 font_rom rom (.addr(font_addr), .data(font_data));
 
-ram vram (.address_a(AVL_ADDR_READ), .byteena_a(AVL_BYTE_EN), .clock_a(CLK), .data_a(AVL_WRITEDATA), .rden_a(AVL_READ_SEL), .wren_a(AVL_WRITE_SEL), .q_a(VRAMreadData), 
-			 .address_b(regIndex), .byteena_b(4'b1111), .clock_b(CLK), .data_b(32'b0), .rden_b(1'b1), .wren_b(1'b0), .q_b(ramOut));
-			 
+ram2 vram (.address_a(AVL_ADDR_READ), .byteena_a(AVL_BYTE_EN), .clock(CLK), .data_a(AVL_WRITEDATA), .rden_a(AVL_READ_SEL), .wren_a(AVL_WRITE_SEL), .q_a(VRAMreadData), 
+			 .address_b(regIndex), .data_b(32'b0), .rden_b(1'b1), .wren_b(1'b0), .q_b(ramOut));
 
 always_ff @(posedge CLK) begin
     if(RESET)
@@ -109,7 +108,7 @@ end
 
 
 //handle drawing (may either be combinational or sequential - or both).
-logic[6:0] col;
+logic[5:0] col;
 logic[5:0] row;
 logic[5:0] colIndex;
 logic[10:0] regIndex;
@@ -117,10 +116,10 @@ logic charIndex;
 logic[15:0] regVal;
 logic[3:0] charRow;
 logic invert;
-logic[2:0] current;
+logic[3:0] current;
 logic[3:0] fgRed, fgGreen, fgBlue, bgRed, bgGreen, bgBlue;
 logic[10:0] font_addr;
-logic[7:0] font_data;
+logic[15:0] font_data;
 logic[31:0] ramOut;
 logic[3:0] fgIdx;
 logic[3:0] bgIdx;
@@ -129,13 +128,13 @@ logic[2:0] bgReg;
 logic bgInReg, fgInReg;
 always_comb
 begin:find_font
-	col = DrawX[9:3]; //character column
+	col = DrawX[9:4]; //character column
 	row = DrawY[9:4]; //character row
-	colIndex = col[6:1];	//which register in the row is it?
+	colIndex = col[5:1];	//which register in the row is it?
 	charIndex = col[0]; //which char in the register is it?
 	charRow = DrawY[3:0]; //current row of the character
-	current = DrawX[2:0]; //current pixel in the row
-	regIndex = colIndex + (10'd40 * row); //register index number
+	current = DrawX[3:0]; //current pixel in the row
+	regIndex = colIndex + (10'd20 * row); //register index number
 	fgReg = fgIdx[3:1]; //index of color register
 	bgReg = bgIdx[3:1]; //index of bg color register
 	fgInReg = fgIdx[0]; //which color in the reg is it?

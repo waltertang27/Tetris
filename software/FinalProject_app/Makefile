@@ -144,6 +144,7 @@ ELF := FinalProject_app.elf
 # Paths to C, C++, and assembly source files.
 C_SRCS += main.c
 C_SRCS += text_mode_vga.c
+C_SRCS += tetris.c
 CXX_SRCS :=
 ASM_SRCS :=
 
