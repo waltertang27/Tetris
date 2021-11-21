@@ -91,7 +91,40 @@ void sameNums(int &sameNumFinder, int &counter, int &num) {
 
 //updates the state of the board
 void update(int &board) {
+    
 
+}
+
+
+//moves the piece DOWN, checks for collisions. Unfinished - need to check for bounds
+void move(int &board) {
+    bool collide = false;
+    std::vector<std::pair<int, int> > coordinates;
+    for(int i = 0; i < 20; i++) {
+        for(int j = 0; j < 10; j++) {
+            if(board[i][j] < 0) {
+                //checks if next piece down exists
+                if(board[i][j + 1] > 0) {
+                    collide = true;
+                    break;
+                }
+                coordinates.push_back(i, j);
+                //not sure how to account for if left/right has blocks but down doesn't
+            }
+        }
+    }
+    if(collide) {
+        for(int i = coordiantes.size() - 1; i >= 0; i--) {
+            int temp = board[coordinates[i].first][coordinates[i].second];
+            board[coordinates[i].first][coordinates[i].second] = 0;
+            board[coordinates[i].first][coordinates[i].second + 1] = temp;
+        }
+    }
+}
+
+bool isGameOver(int board) {
+
+    return true;
 }
 
 //checks if the rows on the board have been filled. if a row is full, clear it
