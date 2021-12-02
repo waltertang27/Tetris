@@ -106,33 +106,16 @@ void tetris() {
     		shiftRight();
     		prevKey = 79;
     	}
-    	else if(keypress == 81 && prevKey == 81){ //soft drop when down key pressed
-    		if(DAS == 0){
-    			drop();
-    			DAS = frameDelay/2; //soft drop moves at double normal drop speed
-    		}
-    		DAS--;
-    	}
-    	else if(keypress == 81){
-    		drop();
-    		prevKey = 81;
-    	}
     	else{ //reset if no key pressed
     		prevKey = 0;
-    		DAS = 15;
+    		DAS = 16;
     	}
-
-    	//handle rotation (Right-Handed Nintendo Rotation System)
-
 
     	//handle block auto-drop
     	if(frameDelay == frame){
     		newBlock = drop();
     		frame = 0;
     	}
-
-    	//handle line clearing
-
     	frame++;
     }
 

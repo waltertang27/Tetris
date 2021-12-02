@@ -106,33 +106,16 @@ void tetris() {
     		shiftRight();
     		prevKey = 79;
     	}
-    	else if(keypress == 81 && prevKey == 81){ //soft drop when down key pressed
-    		if(DAS == 0){
-    			drop();
-    			DAS = frameDelay/2; //soft drop moves at double normal drop speed
-    		}
-    		DAS--;
-    	}
-    	else if(keypress == 81){
-    		drop();
-    		prevKey = 81;
-    	}
     	else{ //reset if no key pressed
     		prevKey = 0;
-    		DAS = 15;
+    		DAS = 16;
     	}
-
-    	//handle rotation (Right-Handed Nintendo Rotation System)
-
 
     	//handle block auto-drop
     	if(frameDelay == frame){
-    		newBlock = drop();
+    		drop();
     		frame = 0;
     	}
-
-    	//handle line clearing
-
     	frame++;
     }
 
@@ -225,38 +208,26 @@ void shiftRight(){
 	}
 }
 
-bool drop() {
+void drop() {
 	bool stopDrop = false; //collision flag
-	int count = 0; //when 4 cells have been moved, move is complete
 	for(int i = 0; i < 20; i++){ //collision check
 		for(int j = 0; j < 10; j++){
 			if(gameBoard[i][j] < 0){
 				if(gameBoard[i+1][j] != 0){
 					stopDrop = true;
 				}
-				count++;
-				if(count == 4){
-					count = 0;
-					goto DONE;
-				}
 			}
 		}
 	}
-	DONE:
 	if(stopDrop){ //
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 10; j++){
 				int current = gameBoard[i][j];
 				if(current < 0){
 					gameBoard[i][j] = abs(current);
-					count++;
-				}
-				if(count == 4){
-					return true;
 				}
 			}
 		}
-		return true;
 	}
 	else{
 		for(int i = 18; i >= 0; i--){
@@ -264,13 +235,8 @@ bool drop() {
 				int current = gameBoard[i][j];
 				if(current < 0){
 					gameBoard[i+1][j] = current;
-					count++;
-				}
-				if(count == 4){
-					return false;
 				}
 			}
 		}
-		return false;
 	}
 }

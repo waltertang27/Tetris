@@ -106,10 +106,10 @@ void tetris() {
     		shiftRight();
     		prevKey = 79;
     	}
-    	else if(keypress == 81 && prevKey == 81){ //soft drop when down key pressed
+    	else if(keypress == 81 && prevKey == 81){
     		if(DAS == 0){
     			drop();
-    			DAS = frameDelay/2; //soft drop moves at double normal drop speed
+    			DAS = frameDelay/2;
     		}
     		DAS--;
     	}
