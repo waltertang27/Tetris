@@ -8,7 +8,8 @@
    <name preferredWidth="206" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
- <window width="1932" height="1047" x="-7" y="0" />
+ <library
+   expandedCategories="Project,Library,Library/Interface Protocols/Serial,Library/Interface Protocols" />
+ <window width="1936" height="1056" x="2552" y="350" />
  <generation path="_PROJECT_NAME_" />
 </preferences>
