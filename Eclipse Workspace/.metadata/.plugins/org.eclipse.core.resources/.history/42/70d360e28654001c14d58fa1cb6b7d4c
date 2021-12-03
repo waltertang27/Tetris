@@ -76,9 +76,6 @@ void tetris() {
     int prevKey = 0; //key pressed in previous frame
     int DAS = 16; //held key move delay
     bool stopDrop = false; //flag to stop falling piece
-    int blockState = 0;
-    int blockX = 0;
-    int blockY = 0;
     while(!endGame) {  //runs while game not over
     	keyboardDriver(); //get new keypress
 
@@ -129,7 +126,7 @@ void tetris() {
     	}
 
     	//handle rotation (Right-Handed Nintendo Rotation System)
-    	if(keypress == )
+
 
     	//handle block auto-drop
     	if(frameDelay == frame){
@@ -143,7 +140,7 @@ void tetris() {
     		}
     		endGame = gameOver();
     	}
-    	drawGame(gameBoard, 1, 15, 4, 15);
+
     	frame++;
     	end = clock();
     	time = ((double)(end - start))/CLOCKS_PER_SEC;
@@ -247,7 +244,7 @@ bool drop() {
 	for(int i = 0; i < 20; i++){ //collision check
 		for(int j = 0; j < 10; j++){
 			if(gameBoard[i][j] < 0){
-				if(i == 20 || gameBoard[i+1][j] != 0){
+				if(gameBoard[i+1][j] != 0){
 					stopDrop = true;
 				}
 				count++;
@@ -259,7 +256,7 @@ bool drop() {
 		}
 	}
 	DONE:
-	if(stopDrop){ //lock piece in place and return true
+	if(stopDrop){ //
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 10; j++){
 				int current = gameBoard[i][j];
@@ -275,7 +272,7 @@ bool drop() {
 		}
 		return true;
 	}
-	else{ //drop piece by one and return false
+	else{
 		for(int i = 18; i >= 0; i--){
 			for(int j = 0; j < 10; j++){
 				int current = gameBoard[i][j];

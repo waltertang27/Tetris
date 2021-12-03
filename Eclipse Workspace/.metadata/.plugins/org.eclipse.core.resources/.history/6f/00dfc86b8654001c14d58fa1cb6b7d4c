@@ -25,5 +25,5 @@ int spawnBlock(int prevBlock); //spawn random block with repeat check, takes pre
 void shiftLeft(); //move block to left
 void shiftRight(); // move block to right
 bool drop(); //drops moving block down 1 move, returns true if block locks into place
-bool lineClear(); //checks for and clears complete lines, called when a block locks into place, returns true if at least one line clears
+void lineClear(); //checks for and clears complete lines, called when a block locks into place
 bool gameOver(); //checks if block is at top row, called when a block locks into place
