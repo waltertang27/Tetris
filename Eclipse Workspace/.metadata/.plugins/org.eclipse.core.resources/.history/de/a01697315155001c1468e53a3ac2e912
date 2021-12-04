@@ -126,18 +126,18 @@ void tetris() {
     		DAS--;
     	}
     	else if(keypress == 80){ //movement when left key pressed
-    		blockX = shiftLeft(blockX);
+    		shiftLeft();
     		prevKey = 80;
     	}
     	else if(keypress == 79 && prevKey == 79){ // movement right if key is held
     		if(DAS == 0){
-    			blockX = shiftRight(blockX);
+    			shiftRight();
     			DAS = 6;
     		}
     		DAS--;
     	}
     	else if (keypress == 79){ //movement when right key pressed
-    		blockX = shiftRight(blockX);
+    		shiftRight();
     		prevKey = 79;
     	}
     	else if(keypress == 81 && prevKey == 81){ //soft drop when down key pressed
@@ -149,9 +149,6 @@ void tetris() {
     	}
     	else if(keypress == 81){
     		newBlock = drop();
-    		if(!newBlock){
-    			blockY += 1;
-    		}
     		prevKey = 81;
     	}
     	else{ //reset if no key pressed
@@ -160,19 +157,13 @@ void tetris() {
     	}
 
     	//handle rotation (Right-Handed Nintendo Rotation System)
-    	if(keypress == 29){ //rotate left on z
-    		blockState = rotateLeft(blockState, blockX, blockY);
-    	}
-    	if(keypress == 27){ //rotate right on x
-    		blockState = rotateRight(blockState, blockX, blockY);
-    	}
+    	if(keypress == 29){ //rotate left
 
+    	}
+    	if(keypress == 27) //rotate right
     	//handle block auto-drop
     	if(frameDelay == frame){
     		newBlock = drop();
-    		if(!newBlock){
-    			blockY += 1;
-    		}
     		frame = 0;
     	}
     	if(newBlock){
@@ -255,15 +246,15 @@ int shiftLeft(int blockX){
 	}
 }
 
-int shiftRight(int blockX){
+void shiftRight(){
 	int count = 0; //when 4 cells have been shifted, shift is complete
 	for(int i = 0; i < 20; i++){ //collision check
 		if(gameBoard[i][9] < 0){ //right wall collision
- 			return blockX;
+ 			return;
 		}
 		for(int j = 0; j < 9; j++){
 			if(gameBoard[i][j] < 0 && gameBoard[i][j + 1 < 0]) //piece collision
-				return blockX;
+				return;
 		}
 	}
 	for(int i = 0; i < 20; i++){ //shift each cell of moving block
@@ -275,7 +266,7 @@ int shiftRight(int blockX){
 				count++;
 			}
 			if(count == 4){
-				return blockX + 1;
+				return;
 			}
 		}
 	}
@@ -365,159 +356,4 @@ bool gameOver(){
 		}
 	}
 	return false;
-}
-
-int rotateLeft(int blockState, int blockX, int blockY){
-	int newState = blockState;
-	switch(blockState){
-	case 1:
-		if(blockX >= 0  && blockX < 7){
-			if(gameBoard[blockY][blockX + 2] == 0 && gameBoard[blockY  + 1][blockX + 2] && gameBoard[blockY + 3][blockX + 2] == 0){
-				newState = 2;
-				gameBoard[blockY][blockX + 2] = -1;
-				gameBoard[blockY  + 1][blockX + 2] = -1;
-				gameBoard[blockY + 3][blockX + 2] = -1;
-				gameBoard[blockY + 2][blockX] = 0;
-				gameBoard[blockY + 2][blockX + 1] = 0;
-				gameBoard[blockY + 2][blockX + 3] = 0;
-			}
-		}
-		break;
-	case 2:
-		if(blockX >= 0  && blockX < 7){
-			if(gameBoard[blockY + 2][blockX] == 0 && gameBoard[blockY + 2][blockX + 1] && gameBoard[blockY + 2][blockX + 3] == 0){
-				newState = 1;
-				gameBoard[blockY][blockX + 2] = 0;
-				gameBoard[blockY  + 1][blockX + 2] = 0;
-				gameBoard[blockY + 3][blockX + 2] = 0;
-				gameBoard[blockY + 2][blockX] = -1;
-				gameBoard[blockY + 2][blockX + 1] = -1;
-				gameBoard[blockY + 2][blockX + 3] = -1;
-			}
-		}
-		break;
-	case 3:
-		newState = blockState;
-		break;
-	case 4:
-		if(blockX > 0 && blockX < 8){
-			if(gameBoard[blockY][blockX + 1] == 0 && gameBoard[blockY][blockX + 2] == 0 && gameBoard[blockY + 2][blockX + 1] == 0){
-				newState = 7;
-				gameBoard[blockY][blockX + 1] = -2;
-				gameBoard[blockY][blockX + 2] = -2;
-				gameBoard[blockY + 2][blockX + 1] = -2;
-				gameBoard[blockY + 1][blockX] = 0;
-				gameBoard[blockY + 1][blockX + 2] = 0;
-				gameBoard[blockY + 2][blockX + 2] = 0;
-			}
-		}
-		break;
-	case 5:
-		if(blockX > 0 && blockX < 8){
-			if(gameBoard[blockY + 1][blockX] == 0 && gameBoard[blockY + 1][blockX + 2] == 0 && gameBoard[blockY + 2][blockX + 2] == 0){
-				newState = 4;
-				gameBoard[blockY + 1][blockX] = -2;
-				gameBoard[blockY + 1][blockX + 2] = -2;
-				gameBoard[blockY + 2][blockX + 2] = -2;
-				gameBoard[blockY][blockX + 1] = 0;
-				gameBoard[blockY + 2][blockX] = 0;
-				gameBoard[blockY + 2][blockX + 1] = 0;
-			}
-		}
-		break;
-	case 6:
-		if(blockX > 0 && blockX < 8){
-			if(gameBoard[blockY][blockX + 1] == 0 && gameBoard[blockY + 2][blockX] == 0 && gameBoard[blockY + 2][blockX + 1] == 0){
-				newState = 5;
-				gameBoard[blockY][blockX + 1] = -2;
-				gameBoard[blockY + 2][blockX] = -2;
-				gameBoard[blockY + 2][blockX + 1] = -2;
-				gameBoard[blockY][blockX] = 0;
-				gameBoard[blockY + 1][blockX] = 0;
-				gameBoard[blockY + 1][blockX + 1] = 0;
-			}
-		}
-		break;
-	case 7:
-		if(blockX > 0 && blockX < 8){
-			if(gameBoard[blockY][blockX] == 0 && gameBoard[blockY + 1][blockX] == 0 && gameBoard[blockY + 1][blockX + 1]){
-				newState = 6;
-				gameBoard[blockY][blockX] = -2;
-				gameBoard[blockY + 1][blockX] = -2;
-				gameBoard[blockY + 1][blockX + 1] = -2;
-				gameBoard[blockY][blockX + 1] = 0;
-				gameBoard[blockY][blockX + 2] = 0;
-				gameBoard[blockY + 2][blockX + 1] = 0;
-			}
-		}
-		break;
-	case 8:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 9:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 10:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 11:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 12:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 13:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 14:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 15:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 16:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 17:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 18:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	case 19:
-		if(blockX > 0 && blockX < 8){
-
-		}
-		break;
-	default:
-		newState = blockState;
-		break;
-	}
-	return newState;
-}
-
-int rotateRight(int blockState int blockX, int blockY){
-
 }

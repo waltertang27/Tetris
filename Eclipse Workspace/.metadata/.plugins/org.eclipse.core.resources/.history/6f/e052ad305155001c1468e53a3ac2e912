@@ -27,5 +27,3 @@ int shiftRight(int blockX); // move block to right and update x position
 bool drop(); //drops moving block down 1 move, returns true if block locks into place
 bool lineClear(); //checks for and clears complete lines, called when a block locks into place, returns true if at least one line clears
 bool gameOver(); //checks if block is at top row, called when a block locks into place
-int rotateLeft(int blockState, int blockX, int blockY); //rotate piece left if possible and return new state
-int rotateRight(int blockState, int blockX, int blockY); //rotate piece right if possible and return new state
