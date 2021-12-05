@@ -247,7 +247,7 @@
           </menus>
         </children>
         <children xsi:type="basic:Part" xmi:id="_AvkUKVOwEeyGSY3jp3_jYg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="tetris.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;tetris.c&quot; partName=&quot;tetris.c&quot; title=&quot;tetris.c&quot; tooltip=&quot;FinalProject_app/tetris.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FinalProject_app/tetris.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;237&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;tetris.c&quot; partName=&quot;tetris.c&quot; title=&quot;tetris.c&quot; tooltip=&quot;FinalProject_app/tetris.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FinalProject_app/tetris.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;22664&quot; selectionTopPixel=&quot;12808&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
@@ -530,7 +530,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AvkVN1OwEeyGSY3jp3_jYg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_1ZzdAFVOEeyIN5kVUEiTRA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_AvlicFOwEeyGSY3jp3_jYg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_CYLSgFYAEeyZLbXlq3FhiA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_AvlicFOwEeyGSY3jp3_jYg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AvkVRVOwEeyGSY3jp3_jYg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -554,7 +554,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AvkVklOwEeyGSY3jp3_jYg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_1Z1SMFVOEeyIN5kVUEiTRA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_Avlh4lOwEeyGSY3jp3_jYg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_CYMgpFYAEeyZLbXlq3FhiA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_Avlh4lOwEeyGSY3jp3_jYg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_AvkVnVOwEeyGSY3jp3_jYg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
