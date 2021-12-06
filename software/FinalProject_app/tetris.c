@@ -78,6 +78,7 @@ void tetris() {
     int blockState = 0; //index of block state (all states shown here: https://harddrop.com/w/images/0/07/NESTetris-pieces.png )
     int blockY = 0; //falling block top left corner x coord
     int blockX = 0; //falling block top left corner y coord
+	int points = 0; //score
     while(!endGame) {  //runs while game not over
     	keyboardDriver(); //get new keypress
 
