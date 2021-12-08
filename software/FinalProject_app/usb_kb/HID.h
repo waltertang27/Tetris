@@ -1,5 +1,5 @@
 /* HID support header */
-
+#pragma once
 #ifndef _HID_h_
 #define _HID_h
 

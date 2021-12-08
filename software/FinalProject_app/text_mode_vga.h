@@ -57,10 +57,14 @@ static struct COLOR colors[]={
 
 void textVGAColorClr();
 void Test();
-void drawGrid(alt_u8 background, alt_u8 foreground);
+void drawGrid(alt_u8 foreground, alt_u8 background, alt_u8 text);
 void drawGame(int gameboard[20][10], alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 bg2);
 void textVGADrawColorText(char* str, int x, int y, alt_u8 background, alt_u8 foreground);
 void setColorPalette (alt_u8 color, alt_u8 red, alt_u8 green, alt_u8 blue); //Fill in this code
+void drawLevel(int level); //draws the level number to the screen
+void drawScore(int score); //draws score to the screen
+void drawDigit(int digit, int location, alt_u8 text, alt_u8 background); //draws a single digit to the screen
+void drawLines(int lines); //draws line count to screen
 
 void textVGAColorScreenSaver(); //Call this for your demo
 

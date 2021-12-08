@@ -1,0 +1,36 @@
+#include "tetris.h"
+#include "text_mode_vga.h"
+#include "usb_kb.c"
+#include "SDL/SDL.h"
+#include "SDL/SDL_mixer.h"
+#include <stdio.h>
+#include "system.h"
+#include "altera_avalon_spi.h"
+#include "altera_avalon_spi_regs.h"
+#include "altera_avalon_pio_regs.h"
+#include "sys/alt_irq.h"
+#include "usb_kb/GenericMacros.h"
+#include "usb_kb/GenericTypeDefs.h"
+#include "usb_kb/HID.h"
+#include "usb_kb/MAX3421E.h"
+#include "usb_kb/transfer.h"
+#include "usb_kb/usb_ch9.h"
+#include "usb_kb/USB.h"
+
+int main() {
+	printf("initializing MAX3421E...\n");
+	MAX3421E_init();
+	printf("initializing USB...\n");
+	USB_init();
+	Mix_Music *music;
+	music = Mix_LoadMUS("music.mp3");
+	if(music) {
+		Mix_PlayMusic(music, -1);
+	}
+	Test();
+	Mix_HaltMusic();
+	Mix_FreeMusic(music);
+	Mix_CloseAudio();
+	Mix_Quit();
+	return 0;
+}

@@ -147,7 +147,7 @@ BYTE XferDispatchPkt( BYTE token, BYTE ep )
  char retry_count = 0;
  BYTE nak_count = 0;
 
-    while( 1 ) {
+ 	 for(int i = 0; i < 5; i++) {
         MAXreg_wr( rHXFR, ( token|ep ));            //launch the transfer
         rcode = 0xff;
         while( (alt_nticks()*1000)/alt_ticks_per_second() < timeout ) {
@@ -196,7 +196,7 @@ BYTE XferInTransfer( BYTE addr/* not sure if it's necessary */, BYTE ep, WORD nb
  BYTE pktsize;
  WORD xfrlen = 0;
     MAXreg_wr( rHCTL, devtable[ addr ].epinfo[ ep ].rcvToggle );    //set toggle value
-    while( 1 ) { // use a 'return' to exit this loop
+    for(int i = 0; i < 5; i++) { // use a 'return' to exit this loop
         rcode = XferDispatchPkt( tokIN, ep );           //IN packet to EP-'endpoint'. Function takes care of NAKS.
         if( rcode ) {
             return( rcode );                            //should be 0, indicating ACK. Else return error code.

@@ -70,10 +70,11 @@ void Test(){
 	//T block: -6
 	//Z block: -7
 	drawGame(gameboard, 1, 15, 4, 15);
-	drawGrid(11, 0);
+	drawGrid(11, 0, 15);
 }
 
-void drawGrid(alt_u8 foreground, alt_u8 background){
+void drawGrid(alt_u8 foreground, alt_u8 background, alt_u8 text){
+	//draw game grid
 	//draw top left corner
 	vga_ctrl->VRAM[174 * 2] = foreground << 4 | background;
 	vga_ctrl->VRAM[174 * 2 + 1] = 0x03;
@@ -106,6 +107,295 @@ void drawGrid(alt_u8 foreground, alt_u8 background){
 		vga_ctrl->VRAM[(214 + i * 40) * 2] = foreground << 4 | background;
 		vga_ctrl->VRAM[(214 + i * 40) * 2 + 1] = 0x0a;
 	}
+
+	//draw next grid & words
+	//draw top left corner
+	vga_ctrl->VRAM[426 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[426 * 2 + 1] = 0x0b;
+	//draw top wall
+	for(int i = 0; i < 4; i++){
+		vga_ctrl->VRAM[(427 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(427 + i) * 2 + 1] = 0x0c;
+	}
+	//draw top right corner
+	vga_ctrl->VRAM[431 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[431 * 2 + 1] = 0x0d;
+	//draw right wall
+	for(int i = 0; i < 7; i++){
+		vga_ctrl->VRAM[(471 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(471 + i * 40) * 2 + 1] = 0x0e;
+	}
+	//draw bottom right corner
+	vga_ctrl->VRAM[751 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[751 * 2 + 1] = 0x0f;
+	//draw bottom wall
+	for(int i = 0; i < 4; i++){
+		vga_ctrl->VRAM[(747 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(747 + i) * 2 + 1] = 0x10;
+	}
+	//draw bottom left corner
+	vga_ctrl->VRAM[746 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[746 * 2 + 1] = 0x11;
+	//draw left wall
+	for(int i = 0; i < 7; i++){
+		vga_ctrl->VRAM[(466 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(466 + i * 40) * 2 + 1] = 0x12;
+	}
+	//N
+	vga_ctrl->VRAM[467 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[467 * 2 + 1] = 0x2d;
+	//E
+	vga_ctrl->VRAM[468 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[468 * 2 + 1] = 0x24;
+	//X
+	vga_ctrl->VRAM[469 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[469 * 2 + 1] = 0x37;
+	//T
+	vga_ctrl->VRAM[470 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[470 * 2 + 1] = 0x33;
+
+	//draw stats grid & words
+	//draw top left corner
+	vga_ctrl->VRAM[41 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[41 * 2 + 1] = 0x0b;
+	//draw top wall
+	for(int i = 0; i < 11; i++){
+		vga_ctrl->VRAM[(42 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(42 + i) * 2 + 1] = 0x0c;
+	}
+	//draw top right corner
+	vga_ctrl->VRAM[53 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[53 * 2 + 1] = 0x0d;
+	//draw right wall
+	for(int i = 0; i < 24; i++){
+		vga_ctrl->VRAM[(93 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(93 + i * 40) * 2 + 1] = 0x0e;
+	}
+	//draw bottom right corner
+	vga_ctrl->VRAM[1053 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[1053 * 2 + 1] = 0x0f;
+	//draw bottom wall
+	for(int i = 0; i < 11; i++){
+		vga_ctrl->VRAM[(1042 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(1042 + i) * 2 + 1] = 0x10;
+	}
+	//draw bottom left corner
+	vga_ctrl->VRAM[1041 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[1041 * 2 + 1] = 0x11;
+	//draw left wall
+	for(int i = 0; i < 24; i++){
+		vga_ctrl->VRAM[(81 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(81 + i * 40) * 2 + 1] = 0x12;
+	}
+	//S
+	vga_ctrl->VRAM[123 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[123 * 2 + 1] = 0x32;
+	//T
+	vga_ctrl->VRAM[124 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[124 * 2 + 1] = 0x33;
+	//A
+	vga_ctrl->VRAM[125 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[125 * 2 + 1] = 0x20;
+	//T
+	vga_ctrl->VRAM[126 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[126 * 2 + 1] = 0x33;
+	//I
+	vga_ctrl->VRAM[127 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[127 * 2 + 1] = 0x28;
+	//S
+	vga_ctrl->VRAM[128 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[128 * 2 + 1] = 0x32;
+	//T
+	vga_ctrl->VRAM[129 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[129 * 2 + 1] = 0x33;
+	//I
+	vga_ctrl->VRAM[130 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[130 * 2 + 1] = 0x28;
+	//C
+	vga_ctrl->VRAM[131 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[131 * 2 + 1] = 0x22;
+
+	//draw score grid & words
+	//draw top left corner
+	vga_ctrl->VRAM[66 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[66 * 2 + 1] = 0x0b;
+	//draw top wall
+	for(int i = 0; i < 9; i++){
+		vga_ctrl->VRAM[(67 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(67 + i) * 2 + 1] = 0x0c;
+	}
+	//draw top right corner
+	vga_ctrl->VRAM[76 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[76 * 2 + 1] = 0x0d;
+	//draw right wall
+	for(int i = 0; i < 7; i++){
+		vga_ctrl->VRAM[(116 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(116 + i * 40) * 2 + 1] = 0x0e;
+	}
+	//draw bottom right corner
+	vga_ctrl->VRAM[396 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[396 * 2 + 1] = 0x0f;
+	//draw bottom wall
+	for(int i = 0; i < 9; i++){
+		vga_ctrl->VRAM[(387 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(387 + i) * 2 + 1] = 0x10;
+	}
+	//draw bottom left corner
+	vga_ctrl->VRAM[386 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[386 * 2 + 1] = 0x11;
+	//draw left wall
+	for(int i = 0; i < 7; i++){
+		vga_ctrl->VRAM[(106 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(106 + i * 40) * 2 + 1] = 0x12;
+	}
+	for(int i = 0; i < 5; i++){
+		vga_ctrl->VRAM[108 + i * 2] = text << 4 | background;
+		vga_ctrl->VRAM[228 + i * 2] = text << 4 | background;
+	}
+	//S
+	vga_ctrl->VRAM[148 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[148 * 2 + 1] = 0x32;
+	//C
+	vga_ctrl->VRAM[149 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[149 * 2 + 1] = 0x22;
+	//O
+	vga_ctrl->VRAM[150 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[150 * 2 + 1] = 0x2e;
+	//R
+	vga_ctrl->VRAM[151 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[151 * 2 + 1] = 0x31;
+	//E
+	vga_ctrl->VRAM[152 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[152 * 2 + 1] = 0x24;
+	//L
+	vga_ctrl->VRAM[268 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[268 * 2 + 1] = 0x2b;
+	//I
+	vga_ctrl->VRAM[269 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[269 * 2 + 1] = 0x28;
+	//N
+	vga_ctrl->VRAM[270 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[270 * 2 + 1] = 0x2d;
+	//E
+	vga_ctrl->VRAM[271 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[271 * 2 + 1] = 0x24;
+	//S
+	vga_ctrl->VRAM[272 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[272 * 2 + 1] = 0x32;
+
+	//draw level & words
+	//draw top left corner
+	vga_ctrl->VRAM[786 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[786 * 2 + 1] = 0x0b;
+	//draw top wall
+	for(int i = 0; i < 7; i++){
+		vga_ctrl->VRAM[(787 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(787 + i) * 2 + 1] = 0x0c;
+	}
+	//draw top right corner
+	vga_ctrl->VRAM[794 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[794 * 2 + 1] = 0x0d;
+	//draw right wall
+	for(int i = 0; i < 4; i++){
+		vga_ctrl->VRAM[(834 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(834 + i * 40) * 2 + 1] = 0x0e;
+	}
+	//draw bottom right corner
+	vga_ctrl->VRAM[994 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[994 * 2 + 1] = 0x0f;
+	//draw bottom wall
+	for(int i = 0; i < 7; i++){
+		vga_ctrl->VRAM[(987 + i) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(987 + i) * 2 + 1] = 0x10;
+	}
+	//draw bottom left corner
+	vga_ctrl->VRAM[986 * 2] = foreground << 4 | background;
+	vga_ctrl->VRAM[986 * 2 + 1] = 0x11;
+	//draw left wall
+	for(int i = 0; i < 4; i++){
+		vga_ctrl->VRAM[(826 + i * 40) * 2] = foreground << 4 | background;
+		vga_ctrl->VRAM[(826 + i * 40) * 2 + 1] = 0x12;
+	}
+	for(int i = 0; i < 5; i++){
+		vga_ctrl->VRAM[868 + i * 2] = text << 4 | background;
+	}
+	//L
+	vga_ctrl->VRAM[868 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[868 * 2 + 1] = 0x2b;
+	//E
+	vga_ctrl->VRAM[869 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[869 * 2 + 1] = 0x24;
+	//V
+	vga_ctrl->VRAM[870 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[870 * 2 + 1] = 0x35;
+	//E
+	vga_ctrl->VRAM[871 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[871 * 2 + 1] = 0x24;
+	//L
+	vga_ctrl->VRAM[872 * 2] = text << 4 | background;
+	vga_ctrl->VRAM[872 * 2 + 1] = 0x2b;
+}
+
+void drawDigit(int digit, int location, alt_u8 text, alt_u8 background){
+	alt_u8 ch;
+	switch(digit){
+	case 1:
+		ch = 0x3a;
+		break;
+	case 2:
+		ch = 0x3b;
+		break;
+	case 3:
+		ch = 0x3c;
+		break;
+	case 4:
+		ch = 0x3d;
+		break;
+	case 5:
+		ch = 0x3e;
+		break;
+	case 6:
+		ch = 0x3f;
+		break;
+	case 7:
+		ch = 0x40;
+		break;
+	case 8:
+		ch = 0x41;
+		break;
+	case 9:
+		ch = 0x42;
+		break;
+	case 0:
+		ch = 0x43;
+		break;
+	}
+	vga_ctrl->VRAM[location * 2] = text << 4 | background;
+	vga_ctrl->VRAM[location * 2 + 1] = ch;
+}
+
+void drawLevel(int level){
+	int dig = level % 10;
+	drawDigit(dig, 912, 15, 0);
+	level /= 10;
+	dig = level % 10;
+	drawDigit(dig, 911, 15, 0);
+}
+
+void drawScore(int score){
+	for(int i = 0; i < 7; i++){
+		int dig = score % 10;
+		drawDigit(dig, 194 - i, 15, 0);
+		score /= 10;
+	}
+}
+
+void drawLines(int lines){
+	for(int i = 0; i < 4; i++){
+		int dig = lines % 10;
+		drawDigit(dig, 311 - i, 15, 0);
+		lines /= 10;
+	}
 }
 
 void drawGame(int gameboard[20][10], alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 bg2){
@@ -113,6 +403,10 @@ void drawGame(int gameboard[20][10], alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 
 	for(int i = 0; i < 20; i++){
 		for(int j = 0; j < 10; j++){
 			int block = abs(gameboard[i][j]);
+			if(block == 0){
+				vga_ctrl->VRAM[(215 + j + 40 * i) * 2] = 0x0;
+				vga_ctrl->VRAM[(215 + j + 40 * i) * 2 + 1] = 0x0;
+			}
 			if(block == 1){ //draw I block
 				vga_ctrl->VRAM[(215 + j + 40 * i) * 2] = fg1 << 4 | bg1;
 				vga_ctrl->VRAM[(215 + j + 40 * i) * 2 + 1] = 0x01;
@@ -144,6 +438,8 @@ void drawGame(int gameboard[20][10], alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 
 		}
 	}
 }
+
+
 
 void setColorPalette (alt_u8 color, alt_u8 red, alt_u8 green, alt_u8 blue)
 {

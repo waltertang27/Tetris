@@ -3,22 +3,10 @@
 //to be used for ECE 385 course materials
 //Revised October 2020 - Zuofu Cheng
 
-#include <stdio.h>
-#include "system.h"
-#include "altera_avalon_spi.h"
-#include "altera_avalon_spi_regs.h"
-#include "altera_avalon_pio_regs.h"
-#include "sys/alt_irq.h"
-#include "usb_kb/GenericMacros.h"
-#include "usb_kb/GenericTypeDefs.h"
-#include "usb_kb/HID.h"
-#include "usb_kb/MAX3421E.h"
-#include "usb_kb/transfer.h"
-#include "usb_kb/usb_ch9.h"
-#include "usb_kb/USB.h"
+#include "usb_kb.h"
+#include <time.h>
 
 extern HID_DEVICE hid_device;
-
 static BYTE addr = 1; 				//hard-wired USB address
 const char* const devclasses[] = { " Uninitialized", " HID Keyboard", " HID Mouse", " Mass storage" };
 
@@ -127,98 +115,19 @@ void printSignedHex1(signed char value) {
 
 void setKeycode(WORD keycode)
 {
-	IOWR_ALTERA_AVALON_PIO_DATA(0x1a0, keycode);
+	IOWR_ALTERA_AVALON_PIO_DATA(KEYCODE_BASE, keycode);
 }
-int keyboardDriver() {
+int keyboardDriver(int key) {
 	BYTE rcode;
-	BOOT_MOUSE_REPORT buf;		//USB mouse report
 	BOOT_KBD_REPORT kbdbuf;
-
-	BYTE runningdebugflag = 0;//flag to dump out a bunch of information when we first get to USB_STATE_RUNNING
-	BYTE errorflag = 0; //flag once we get an error device so we don't keep dumping out state info
-	BYTE device;
 	WORD keycode;
-	printf(".");
 	MAX3421E_Task();
 	USB_Task();
-	//usleep (500000);
-	if (GetUsbTaskState() == USB_STATE_RUNNING) {
-		if (!runningdebugflag) {
-			runningdebugflag = 1;
-			setLED(9);
-			device = GetDriverandReport();
-		} else if (device == 1) {
-			//run keyboard debug polling
-			rcode = kbdPoll(&kbdbuf);
-			if (rcode == hrNAK) {
-				continue; //NAK means no new data
-			} else if (rcode) {
-				printf("Rcode: ");
-				printf("%x \n", rcode);
-				continue;
-			}
-			printf("keycodes: ");
-			for (int i = 0; i < 6; i++) {
-				printf("%x ", kbdbuf.keycode[i]);
-
-			}
-			keypress = kbdbuf.keycode[0];
-			setKeycode(kbdbuf.keycode[0]);
-			printSignedHex0(kbdbuf.keycode[0]);
-			printSignedHex1(kbdbuf.keycode[1]);
-			printf("\n");
-		}
-
-		else if (device == 2) {
-			rcode = mousePoll(&buf);
-			if (rcode == hrNAK) {
-				//NAK means no new data
-				continue;
-			} else if (rcode) {
-				printf("Rcode: ");
-				printf("%x \n", rcode);
-				continue;
-			}
-			printf("X displacement: ");
-			printf("%d ", (signed char) buf.Xdispl);
-			printSignedHex0((signed char) buf.Xdispl);
-			printf("Y displacement: ");
-			printf("%d ", (signed char) buf.Ydispl);
-			printSignedHex1((signed char) buf.Ydispl);
-			printf("Buttons: ");
-			printf("%x\n", buf.button);
-			if (buf.button & 0x04)
-				setLED(2);
-			else
-				clearLED(2);
-			if (buf.button & 0x02)
-				setLED(1);
-			else
-				clearLED(1);
-			if (buf.button & 0x01)
-				setLED(0);
-			else
-				clearLED(0);
-		}
-	} else if (GetUsbTaskState() == USB_STATE_ERROR) {
-		if (!errorflag) {
-			errorflag = 1;
-			clearLED(9);
-			printf("USB Error State\n");
-			//print out string descriptor here
-		}
-	} else //not in USB running state
-	{
-
-		printf("USB task state: ");
-		printf("%x\n", GetUsbTaskState());
-		if (runningdebugflag) {	//previously running, reset USB hardware just to clear out any funky state, HS/FS etc
-			runningdebugflag = 0;
-			MAX3421E_init();
-			USB_init();
-		}
-		errorflag = 0;
-		clearLED(9);
+	//run keyboard debug polling
+	rcode = kbdPoll(&kbdbuf);
+	if (rcode) {
+		return key;
 	}
-	return 0;
+	return (int)kbdbuf.keycode[0];
 }
+

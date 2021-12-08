@@ -1,24 +1,21 @@
-#include "tetris.h"
 #include "text_mode_vga.h"
-#include "usb_kb.c"
-#include "SDL/SDL.h"
-#include "SDL/SDL_mixer.h"
+#include <stdio.h>
+#include "tetris.h"
+#include "usb_kb/MAX3421E.h"
+#include "usb_kb/transfer.h"
+#include "usb_kb.h"
 
-
-int main() {
+int main(){
 	printf("initializing MAX3421E...\n");
 	MAX3421E_init();
 	printf("initializing USB...\n");
 	USB_init();
-	Mix_Music *music;
-	music = Mix_LoadMUS("music.mp3");
-	if(music) {
-		Mix_PlayMusic(music, -1);
+	textVGAColorClr();
+	for (int i = 0; i < 16; i++)
+	{
+		setColorPalette (i, colors[i].red, colors[i].green, colors[i].blue);
 	}
-	Test();
-	Mix_HaltMusic();
-	Mix_FreeMusic(music);
-	Mix_CloseAudio();
-	Mix_Quit();
+	drawGrid(11, 0, 15);
+	tetris();
 	return 0;
 }

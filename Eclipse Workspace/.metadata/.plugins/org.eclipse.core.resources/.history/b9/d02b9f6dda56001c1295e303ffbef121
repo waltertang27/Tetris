@@ -1,0 +1,101 @@
+#include "text_mode_vga.h"
+#include <stdio.h>
+#include "system.h"
+#include "altera_avalon_spi.h"
+#include "altera_avalon_spi_regs.h"
+#include "altera_avalon_pio_regs.h"
+#include "sys/alt_irq.h"
+#include "usb_kb/GenericMacros.h"
+#include "usb_kb/GenericTypeDefs.h"
+#include "usb_kb/HID.h"
+#include "usb_kb/MAX3421E.h"
+#include "usb_kb/transfer.h"
+#include "usb_kb/usb_ch9.h"
+#include "usb_kb/USB.h"
+#include "tetris.h"
+
+int main(){
+	printf("initializing MAX3421E...\n");
+	MAX3421E_init();
+	printf("initializing USB...\n");
+	USB_init();
+	textVGAColorClr();
+	for (int i = 0; i < 16; i++)
+	{
+		setColorPalette (i, colors[i].red, colors[i].green, colors[i].blue);
+	}
+	drawGrid(11, 0);
+	tetris();
+	return 0;
+}
+
+//ECE 385 USB Host Shield code
+//based on Circuits-at-home USB Host code 1.x
+//to be used for ECE 385 course materials
+//Revised October 2020 - Zuofu Cheng
+
+extern HID_DEVICE hid_device;
+
+static BYTE addr = 1; 				//hard-wired USB address
+const char* const devclasses[] = { " Uninitialized", " HID Keyboard", " HID Mouse", " Mass storage" };
+
+BYTE GetDriverandReport() {
+	BYTE i;
+	BYTE rcode;
+	BYTE device = 0xFF;
+	BYTE tmpbyte;
+
+	DEV_RECORD* tpl_ptr;
+	printf("Reached USB_STATE_RUNNING (0x40)\n");
+	for (i = 1; i < USB_NUMDEVICES; i++) {
+		tpl_ptr = GetDevtable(i);
+		if (tpl_ptr->epinfo != NULL) {
+			printf("Device: %d", i);
+			printf("%s \n", devclasses[tpl_ptr->devclass]);
+			device = tpl_ptr->devclass;
+		}
+	}
+	//Query rate and protocol
+	rcode = XferGetIdle(addr, 0, hid_device.interface, 0, &tmpbyte);
+	if (rcode) {   //error handling
+		printf("GetIdle Error. Error code: ");
+		printf("%x \n", rcode);
+	} else {
+		printf("Update rate: ");
+		printf("%x \n", tmpbyte);
+	}
+	printf("Protocol: ");
+	rcode = XferGetProto(addr, 0, hid_device.interface, &tmpbyte);
+	if (rcode) {   //error handling
+		printf("GetProto Error. Error code ");
+		printf("%x \n", rcode);
+	} else {
+		printf("%d \n", tmpbyte);
+	}
+	return device;
+}
+
+void setKeycode(WORD keycode)
+{
+	IOWR_ALTERA_AVALON_PIO_DATA(0x1a0, keycode);
+}
+int keyboardDriver() {
+	BYTE rcode;
+	BOOT_KBD_REPORT kbdbuf;
+
+	BYTE runningdebugflag = 0;//flag to dump out a bunch of information when we first get to USB_STATE_RUNNING
+	BYTE errorflag = 0; //flag once we get an error device so we don't keep dumping out state info
+	BYTE device;
+	WORD keycode;
+	printf(".");
+	MAX3421E_Task();
+	USB_Task();
+	rcode = kbdPoll(&kbdbuf);
+	printf("keycodes: ");
+	for (int i = 0; i < 6; i++) {
+		printf("%x ", kbdbuf.keycode[i]);
+	}
+	//keypress = kbdbuf.keycode[0];
+	//setKeycode(kbdbuf.keycode[0]);
+	printf("\n");
+}
