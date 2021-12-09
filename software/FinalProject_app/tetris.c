@@ -18,6 +18,7 @@
 #include "usb_kb/usb_ch9.h"
 #include "usb_kb/USB.h"
 #include "usb_kb.h"
+#include "text_mode_vga.h"
 
 //I block: -1
 //J Block: -2
@@ -48,83 +49,105 @@ void dropSBlock() {
 }
 
 void dropTBlock() {
-	draw16(3,0,-6);
+	draw15(3,0,-6);
 }
 
 void dropZBlock() {
 	draw19(3,0,-7);
 }
 
-void gameTest(){
-}
-
-
-
-
-
-void tetris() {
+int tetris(int startLevel) {
+	srand(time(0)); //random seed based on time
 	clock_t start, end; //keep track of time used for function (from https://www.geeksforgeeks.org/how-to-measure-time-taken-by-a-program-in-c/ )
 	double time;
     bool endGame = false;  //checks if game is over
-    int prevBlock = 0; //store previous block id
-    int num = 0; //random block generation
-    int level = 10;
+    int prevBlock = 0; //duplicate check
+    int nextBlock = (rand() % 7) + 1; //random block generation
+    int currBlock = 0;
+    int level = startLevel;
     int frameDelay[19] = {24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 4, 4, 3, 3, 3, 2, 2, 2}; //value to adjust speed of block drop
-    int color1[10] = {1, 2, 5, 1, 12, 10, 4, 1, 1, 4}; //level color palette sets
+    int softDrop[19] = {12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 2, 2, 1, 1, 1, 1, 1, 1}; //softDrop speed by level
+    int SDC; //soft drop frame counter
+    int color1[10] = {1, 2, 5, 1, 12, 10, 4, 1, 9, 4}; //level color palette sets
     int color2[10] = {5, 10, 13, 2, 10, 9, 8, 4, 12, 14};
     int frame = 0; //current frame value for block drop
     bool newBlock = true; //determine when a new block is needed
     int prevKey = 0; //key pressed in previous frame
-    int DAS = 2; //held key move delay
+    int DAS = 6; //held key move delay
     int blockState = 0; //index of block state (all states shown here: https://harddrop.com/w/images/0/07/NESTetris-pieces.png )
     int Y = 0; //falling block top left corner x coord
     int X = 0; //falling block top left corner y coord
 	int score = 0;
 	int lineCount = 0; //overall line counter
 	int levelLines = 0; //line counter for level up
+	int I = 0; //piece counters for stats
+	int J = 0;
+	int L = 0;
+	int O = 0;
+	int S = 0;
+	int T = 0;
+	int Z = 0;
 	for(int i = 0; i < 20; i++){
 		for(int j = 0; j < 10; j++){
 			gameBoard[i][j] = 0;
 		}
 	}
+	drawGrid(11, 0, 15);
 	drawLevel(level);
 	drawLines(lineCount);
+	drawStatBlocks(color1[level % 10], 15, color2[level % 10], 15);
     while(!endGame) {  //runs while game not over
     	start = clock();
     	keycode = keyboardDriver(keycode); //get new keypress
     	//spawn new block
     	if(newBlock){
-    		prevBlock = num;
-    		num = spawnBlock(prevBlock);
+    		prevBlock = currBlock;
+    		currBlock = nextBlock;
+    		nextBlock = (rand() % 7) + 1;   //generate a random number corresponding to a block
+    		//reroll if block is same as previous, biases against repeat blocks but does not prevent them
+    		if(nextBlock == prevBlock){
+    			nextBlock = (rand() % 7) + 1;
+    		}
+    		drawNext(0, 0, 0, 0, 0);
+    		drawNext(nextBlock, color1[level % 10], 15, color2[level % 10], 15);
+    		spawnBlock(currBlock);
     		Y = 0;
     		X = 3;
-    		switch(num){
+    		switch(currBlock){
     		case 1:
+    			I++;
     			blockState = 2;
     			break;
     		case 2:
+    			J++;
     			blockState = 5;
     			break;
     		case 3:
+    			L++;
     			blockState = 11;
     			break;
     		case 4:
+    			O++;
     			blockState = 3;
     			X = 4;
     			break;
     		case 5:
+    			S++;
     			blockState = 13;
     			break;
     		case 6:
-    			blockState = 16;
+    			T++;
+    			blockState = 15;
     			break;
     		case 7:
+    			Z++;
     			blockState = 19;
     			break;
     		default:
     			blockState = 0;
     			break;
     		}
+    		drawStats(T, J, Z, O, S, L, I);
     		newBlock = false;
     	}
     	//handle keyboard movement
@@ -133,7 +156,7 @@ void tetris() {
     			if(shiftLeft(blockState, X, Y)){
     				X -= 1;
     			}
-    			DAS = 4;
+    			DAS = 3;
     		}
     		DAS--;
     	}
@@ -148,7 +171,7 @@ void tetris() {
     			if(shiftRight(blockState, X, Y)){
     				X += 1;
     			}
-    			DAS = 4;
+    			DAS = 3;
     		}
     		DAS--;
     	}
@@ -159,28 +182,54 @@ void tetris() {
     		prevKey = 79;
     	}
     	else if(keycode == 81 && prevKey == 81){ //soft drop when down key pressed
-    		if(DAS == 0){
-    			newBlock = drop(blockState, X, Y);
+    		if(SDC == 0){
     			score += 1; //1 point per tile soft dropped
+    			newBlock = drop(blockState, X, Y);
+				if(!newBlock){
+					Y += 1;
+				}
     			if(level < 19){
-    				DAS = frameDelay[level]/2 + 1; //soft drop moves at double normal drop speed
+    				SDC = softDrop[level] + 1; //soft drop moves at double normal drop speed
     			}
     			else{
-    				DAS = 1;
+    				SDC = 0;
     			}
     		}
-    		DAS--;
+    		SDC--;
     	}
     	else if(keycode == 81){
+    		score += 1; //1 point per tile soft dropped
     		newBlock = drop(blockState, X, Y);
     		if(!newBlock){
     			Y += 1;
     		}
+    		if(level < 19){
+    			SDC = softDrop[level];
+    		}
+    		else{
+    			SDC = 0;
+    		}
     		prevKey = 81;
+    	}
+    	else if(keycode == 41){
+    		drawPause();
+    		usleep(100000);
+    		keycode = keyboardDriver(keycode);
+    		while(keycode != 41 && keycode != 40){ //enter and esc both unpause
+    			keycode = keyboardDriver(keycode);
+    		}
+    		unpause();
+    		usleep(100000);
     	}
     	else{ //reset if no key pressed
     		prevKey = 0;
-    		DAS = 8;
+    		DAS = 6;
+    		if(level < 19){
+    			SDC = softDrop[level];
+    		}
+    		else{
+    			SDC = 0;
+    		}
     	}
 
     	//handle rotation (Right-Handed Nintendo Rotation System)
@@ -234,7 +283,7 @@ void tetris() {
         			score += 1200*(level + 1);
         		}
         		drawLines(lineCount);
-    			usleep(100000); //drop delay
+    			//usleep(100000); //drop delay
     			frame = 0; //reset drop timer
     			/*if(level == startLevel){
     				if(lineCount >= (startLevel * 10) + 10 || lineCount >= max((startLevel*10) - 50), 100){
@@ -245,6 +294,7 @@ void tetris() {
     			if(levelLines > 10){ //level up every10 lines
     				level += 1;
     				drawLevel(level);
+    				drawStatBlocks(color1[level % 10], 15, color2[level % 10], 15);
     				levelLines = 0;
     			}
     		}
@@ -260,6 +310,7 @@ void tetris() {
     		usleep(33000 - time);
     	}
     }
+    return score;
 }
 
 int max(int a, int b){
@@ -269,14 +320,8 @@ int max(int a, int b){
 	return b;
 }
 
-int spawnBlock(int prevBlock){
-	int num = 0;
-	num = (rand() % 7) + 1;   //generate a random number corresponding to a block
-	//reroll if block is same as previous, biases against repeat blocks but does not prevent them
-	if(num == prevBlock){
-		num = (rand() % 7) + 1;
-	}
-	switch(num) {
+void spawnBlock(int Block){
+	switch(Block) {
 		case 1:
 			dropIBlock();
 			break;
@@ -301,7 +346,6 @@ int spawnBlock(int prevBlock){
 		default:
 			break;
 	}
-	return num;
 }
 
 bool shiftLeft(int blockState, int X, int Y){
@@ -854,6 +898,27 @@ int lineClear(int Y){
 		}
 	}
 	if(clears == 0) {return false;}
+	for(int i = 0; i < 5; i++){ //line clearing animation
+		for(int j = 0; j < clears; j++){
+			vga_ctrl->VRAM[(215 + (4 - i) + 40 * clearLines[j]) * 2] = 0x0;
+			vga_ctrl->VRAM[(215 + (4 - i) + 40 * clearLines[j]) * 2 + 1] = 0x0;
+			vga_ctrl->VRAM[(215 + (5 + i) + 40 * clearLines[j]) * 2] = 0x0;
+			vga_ctrl->VRAM[(215 + (5 + i) + 40 * clearLines[j]) * 2 + 1] = 0x0;
+			if(clears == 4){ //flashing animation for 4 clears
+				if(i % 2 == 1){
+					for(int k = 0; k < 10; k++){
+						vga_ctrl->VRAM[(215 + k + 40 * clearLines[j]) * 2] = 15 << 4 | 15;
+					}
+				}
+				else{
+					for(int k = 0; k < 10; k++){
+						vga_ctrl->VRAM[(215 + k + 40 * clearLines[j]) * 2] = 0 << 4 | 0;
+					}
+				}
+			}
+		}
+		usleep(10000);
+	}
 	for(int i = 0; i < clears; i++){ //for all marked lines, move all lines above down by 1
 		for(int j = clearLines[i]; j > 0; j--){
 			for(int k = 0; k < 10; k++){

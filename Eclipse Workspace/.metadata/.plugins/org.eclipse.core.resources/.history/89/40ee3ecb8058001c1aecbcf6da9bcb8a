@@ -1,0 +1,27 @@
+#include "text_mode_vga.h"
+#include <stdio.h>
+#include "tetris.h"
+#include "usb_kb/MAX3421E.h"
+#include "usb_kb/transfer.h"
+#include "usb_kb.h"
+
+int main(){
+	printf("initializing MAX3421E...\n");
+	MAX3421E_init();
+	printf("initializing USB...\n");
+	USB_init();
+	clearScreen();
+	for (int i = 0; i < 16; i++)
+	{
+		setColorPalette (i, colors[i].red, colors[i].green, colors[i].blue);
+	}
+	highscore = 0;
+	while(1){ //run game
+		startScreen(); //show title screen
+		clearScreen(); //empty screen
+		tetris(chooseLevel()); //run game
+		gameOver(); //show game over text
+		clearScreen(); //return to title screen
+	}
+	return 0;
+}

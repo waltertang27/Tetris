@@ -1,7 +1,6 @@
 obj/default/tetris.o: tetris.c tetris.h usb_kb/GenericTypeDefs.h \
- text_mode_vga.h ../FinalProject_app_bsp/system.h \
- ../FinalProject_app_bsp/linker.h \
- ../FinalProject_app_bsp//HAL/inc/alt_types.h \
+ ../FinalProject_app_bsp//HAL/inc/alt_types.h text_mode_vga.h \
+ ../FinalProject_app_bsp/system.h ../FinalProject_app_bsp/linker.h \
  ../FinalProject_app_bsp//drivers/inc/altera_avalon_spi.h \
  ../FinalProject_app_bsp//drivers/inc/altera_avalon_spi_regs.h \
  ../FinalProject_app_bsp//HAL/inc/io.h \
@@ -16,13 +15,13 @@ tetris.h:
 
 usb_kb/GenericTypeDefs.h:
 
+../FinalProject_app_bsp//HAL/inc/alt_types.h:
+
 text_mode_vga.h:
 
 ../FinalProject_app_bsp/system.h:
 
 ../FinalProject_app_bsp/linker.h:
-
-../FinalProject_app_bsp//HAL/inc/alt_types.h:
 
 ../FinalProject_app_bsp//drivers/inc/altera_avalon_spi.h:
 

@@ -10,12 +10,28 @@ int main(){
 	MAX3421E_init();
 	printf("initializing USB...\n");
 	USB_init();
-	textVGAColorClr();
-	for (int i = 0; i < 16; i++)
+	clearScreen(); //initialize screen
+	for (int i = 0; i < 16; i++) //set color palette
 	{
 		setColorPalette (i, colors[i].red, colors[i].green, colors[i].blue);
 	}
-	drawGrid(11, 0, 15);
-	tetris();
+	highscore = 0; //initialize high score
+	for(int i = 0; i < 3; i++){ //initialize high scorer
+		scorer[i] = 0;
+	}
+	while(1){ //run game
+		drawHighScore(); //draw high score on title screen
+		startScreen(); //show title screen
+		int startLv = chooseLevel(); //run level select
+		clearScreen(); //empty screen
+		int score = tetris(startLv); //run game
+		endGame(); //show game over text
+		if(score > highscore){ //update high score and allow user to enter name
+			highscore = score;
+			clearScreen();
+			enterHighScore();
+		}
+		clearScreen(); //return to title screen
+	}
 	return 0;
 }

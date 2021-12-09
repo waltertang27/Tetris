@@ -1,9 +1,13 @@
 #pragma once
 #include <stdbool.h>
 #include "usb_kb/GenericTypeDefs.h"
+#include "alt_types.h"
 
-int gameBoard[20][10]; //global 2d array for master game board
-int keycode; //global variable for keyboard input
+int gameBoard[20][10]; //2d array containing current game board data
+int keycode; //keyboard input
+int highscore; //high score variable
+alt_u8 scorer[3]; //high scorer letters
+
 
 //I block: -1
 //J Block: -2
@@ -23,8 +27,8 @@ void dropTBlock();
 void dropZBlock();
 
 void gameTest();
-void tetris(); //top-level function to run the tetris game
-int spawnBlock(int prevBlock); //spawn random block with repeat check, takes previous block id and returns new block id
+int tetris(int startLevel); //top-level function to run the tetris game, returns score
+void spawnBlock(int Block); //spawn random block with repeat check, takes previous block id and returns new block id
 bool shiftLeft(int blockState, int X, int Y); //move block to left, return true if piece is shifted successfully
 bool shiftRight(int blockState, int X, int Y); // move block to right, return true if piece is shifted successfully
 bool drop(int blockState, int X, int Y); //drops moving block down 1 move, returns true if block locks into placem false if block moves

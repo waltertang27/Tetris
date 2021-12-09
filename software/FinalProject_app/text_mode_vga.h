@@ -54,19 +54,23 @@ static struct COLOR colors[]={
 	{"white",          0xf, 0xf, 0xf} //15
 };
 
-
-void textVGAColorClr();
-void Test();
 void drawGrid(alt_u8 foreground, alt_u8 background, alt_u8 text);
 void drawGame(int gameboard[20][10], alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 bg2);
-void textVGADrawColorText(char* str, int x, int y, alt_u8 background, alt_u8 foreground);
 void setColorPalette (alt_u8 color, alt_u8 red, alt_u8 green, alt_u8 blue); //Fill in this code
 void drawLevel(int level); //draws the level number to the screen
 void drawScore(int score); //draws score to the screen
 void drawDigit(int digit, int location, alt_u8 text, alt_u8 background); //draws a single digit to the screen
 void drawLines(int lines); //draws line count to screen
-
-void textVGAColorScreenSaver(); //Call this for your demo
-
+void drawStatBlocks(alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 bg2); //draws blocks for block counter to screen
+void drawNext(int block, alt_u8 fg1, alt_u8 bg1, alt_u8 fg2, alt_u8 bg2); //draw next block to screen
+void drawStats(int T, int J, int Z, int O, int S, int L, int I); //draw block drop stats
+void startScreen(); //runs title screen
+void clearScreen(); //set screen to black
+void endGame(); //draw game over text
+int chooseLevel(); //level select box
+void drawHighScore(); //draw high score & text to screen
+void drawPause(); //draw paused text
+void unpause(); //clear paused text
+void enterHighScore(); //screen to enter high score name
 
 #endif /* TEXT_MODE_VGA_COLOR_H_ */
